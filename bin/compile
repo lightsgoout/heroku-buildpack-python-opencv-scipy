@@ -68,7 +68,7 @@ mkdir -p $CACHE_DIR
 title "Generating environment"
 subtitle "Fetching..."
 curl -s -L "https://s3.eu-central-1.amazonaws.com/foodprice/python-opencv.tar.gz" > $CACHE_DIR/env.tar.gz
-subtitle "Unpacking..."
+subtitle "Unpacking... {$CACHE_DIR}/env.tar.gz to {$BUILD_DIR}"
 tar -xzf $CACHE_DIR/env.tar.gz -C $BUILD_DIR
 
 # creating env variables
