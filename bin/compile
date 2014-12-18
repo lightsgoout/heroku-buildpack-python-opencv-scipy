@@ -61,7 +61,7 @@ BUILD_DIR=$APP_DIR
 cd $BUILD_DIR
 
 unset ATLAS BLAS LAPACK LD_LIBRARY_PATH PATH PYTHONPATH
-export LD_LIBRARY_PATH="$BUILD_DIR/.heroku/python/lib/:$BUILD_DIR/.heroku/vendor/lib"
+export LD_LIBRARY_PATH="$BUILD_DIR/.heroku/python/lib/:$BUILD_DIR/vendor/lib"
 export PATH="$BUILD_DIR/.heroku/python/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export PYTHONPATH="$BUILD_DIR/.heroku/python/lib/python2.7/site-packages/:$BUILD_DIR/vendor/lib/python2.7/site-packages/"
 
@@ -77,7 +77,7 @@ tar -xzf $CACHE_DIR/env.tar.gz -C $INSTALL_DIR
 title "Creating environment variables."
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/5251124.sh
-export LD_LIBRARY_PATH="\$HOME/.heroku/python/lib/:\$HOME/.heroku/vendor/lib:\$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="\$HOME/.heroku/python/lib/:\$HOME/vendor/lib:\$LD_LIBRARY_PATH"
 export PATH="\$HOME/.heroku/python/bin:\$PATH"
 export PYTHONPATH="\$HOME/.heroku/python/lib/python2.7/site-packages/:\$HOME/vendor/lib/python2.7/site-packages/"
 EOF
