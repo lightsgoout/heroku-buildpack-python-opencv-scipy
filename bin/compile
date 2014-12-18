@@ -54,16 +54,12 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 INSTALL_DIR=$BUILD_DIR/vendor/
+ENVSCRIPT=$BUILD_DIR/.profile.d/opencv.sh
 
 APP_DIR="/app"
 ORIG_BUILD_DIR=$BUILD_DIR
 BUILD_DIR=$APP_DIR
 cd $BUILD_DIR
-
-unset ATLAS BLAS LAPACK LD_LIBRARY_PATH PATH PYTHONPATH
-export LD_LIBRARY_PATH="$BUILD_DIR/.heroku/python/lib/:$BUILD_DIR/vendor/lib"
-export PATH="$BUILD_DIR/.heroku/python/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-export PYTHONPATH="$BUILD_DIR/.heroku/python/lib/python2.7/site-packages/:$BUILD_DIR/vendor/lib/python2.7/site-packages/"
 
 # Setup environment
 mkdir -p $CACHE_DIR
@@ -74,12 +70,14 @@ subtitle "Unpacking... $CACHE_DIR/env.tar.gz to $INSTALL_DIR"
 tar -xzf $CACHE_DIR/env.tar.gz -C $INSTALL_DIR
 
 # creating env variables
-title "Creating environment variables."
+title "Creating environment variables for opencv."
 mkdir -p $BUILD_DIR/.profile.d
-cat <<EOF >$BUILD_DIR/.profile.d/5251124.sh
-export LD_LIBRARY_PATH="\$HOME/.heroku/python/lib/:\$HOME/vendor/lib:\$LD_LIBRARY_PATH"
-export PATH="\$HOME/.heroku/python/bin:\$PATH"
-export PYTHONPATH="\$HOME/.heroku/python/lib/python2.7/site-packages/:\$HOME/vendor/lib/python2.7/site-packages/"
-EOF
+
+echo "export PYTHONPATH=\"$HOME/vendor/lib/python2.7/site-packages/:\$PYTHONPATH\""
+echo "export LD_LIBRARY_PATH=\"$HOME/vendor/lib/:\$LD_LIBRARY_PATH\""
+
+echo "export PYTHONPATH=\"$HOME/vendor/lib/python2.7/site-packages/:\$PYTHONPATH\"" > $ENVSCRIPT
+echo "export LD_LIBRARY_PATH=\"$HOME/vendor/lib/:\$LD_LIBRARY_PATH\"" >> $ENVSCRIPT
+
 
 title "Buildpack installed."
