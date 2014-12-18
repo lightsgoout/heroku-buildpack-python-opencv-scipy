@@ -66,10 +66,8 @@ export PYTHONPATH="$BUILD_DIR/.heroku/python/lib/python2.7/site-packages/:$BUILD
 # Setup environment
 mkdir -p $CACHE_DIR
 title "Generating environment"
-if [ ! -f $CACHE_DIR/env.tar.gz ]; then
-	subtitle "Fetching..."
-	curl -s -L "https://s3.eu-central-1.amazonaws.com/foodprice/python-opencv.tar.gz" > $CACHE_DIR/env.tar.gz
-fi
+subtitle "Fetching..."
+curl -s -L "https://s3.eu-central-1.amazonaws.com/foodprice/python-opencv.tar.gz" > $CACHE_DIR/env.tar.gz
 subtitle "Unpacking..."
 tar -xzf $CACHE_DIR/env.tar.gz -C $BUILD_DIR
 
