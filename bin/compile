@@ -53,6 +53,8 @@ deep-rm() {
 BUILD_DIR=$1
 CACHE_DIR=$2
 
+INSTALL_DIR=$BUILD_DIR/vendor/
+
 APP_DIR="/app"
 ORIG_BUILD_DIR=$BUILD_DIR
 BUILD_DIR=$APP_DIR
@@ -68,8 +70,8 @@ mkdir -p $CACHE_DIR
 title "Generating environment"
 subtitle "Fetching..."
 curl -s -L "https://s3.eu-central-1.amazonaws.com/foodprice/python-opencv.tar.gz" > $CACHE_DIR/env.tar.gz
-subtitle "Unpacking... {$CACHE_DIR}/env.tar.gz to {$BUILD_DIR}"
-tar -xzf $CACHE_DIR/env.tar.gz -C $BUILD_DIR
+subtitle "Unpacking... $CACHE_DIR/env.tar.gz to $INSTALL_DIR"
+tar -xzf $CACHE_DIR/env.tar.gz -C $INSTALL_DIR
 
 # creating env variables
 title "Creating environment variables."
